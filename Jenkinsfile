@@ -8,7 +8,7 @@ node {
 
 
   stage 'Build image'
-  sh("docker build -t ${imageTag} -f Dockerfile.server .")
+  sh("docker build -t ${imageTag} -f Dockerfile.client .")
 
   stage 'Push image to registry'
   sh("gcloud docker -- push ${imageTag}")
