@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: dogpark-client
+spec:
+  type: LoadBalancer
+  ports:
+   - port: 50051
+     targetPort: client
+  selector:
+     app: dogpark
+     role: client

@@ -1,0 +1,15 @@
+FROM golang:1.9.1
+
+WORKDIR /go/src/github.com/user/grpcDogParkGo/server
+
+COPY server .
+
+COPY dogpark ../dogpark
+
+RUN go get -v ./...
+
+RUN go install -v ./...
+
+EXPOSE 50051
+
+CMD [ "server" ]

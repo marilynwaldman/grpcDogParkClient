@@ -1,0 +1,35 @@
+syntax = "proto3";
+package dogpark;
+
+
+// The DogPark service definition.
+service DogPark {   
+  // Get all DogParks with filter - A server-to-client streaming RPC.
+  rpc GetDogParks(DogParkFilter) returns (stream DogParkRequest) {}
+  // Create a new DogPark - A simple RPC 
+  rpc CreateDogPark (DogParkRequest) returns (DogParkResponse) {}
+}
+
+// Request message for creating a new dogpark
+message DogParkRequest {
+  int32 id = 1;  // Unique ID number for a DogPark.
+  string name = 2;
+  string website = 3;
+  
+  message Address {
+    string street = 1;
+    string city = 2;
+    string state = 3;
+    string zip = 4;
+
+  }
+  repeated Address addresses = 4;
+}
+
+message DogParkResponse {
+  int32 id = 1;
+  bool success = 2;
+}
+message DogParkFilter {    
+  string keyword = 1;
+}

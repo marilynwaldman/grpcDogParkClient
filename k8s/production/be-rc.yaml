@@ -1,0 +1,26 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: dogpark-client-production
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: client
+      labels:
+        app: dogpark
+        role: client
+        env: production
+    spec:
+      containers:
+      - name: client
+        image: gcr.io/jenkins-187820/client
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "100m"
+        imagePullPolicy: Always
+        readinessProbe:
+        ports:
+        - name: client
+          containerPort: 50051
